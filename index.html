@@ -15,7 +15,7 @@
 
 <hr>
 <video controls autoplay playsinline></video>
-
+<div id='div-response'></div>
 <script src="js/RecordRTC.js"></script>
 <script src="js/vimeo-upload.js"></script>
 <script>
@@ -42,6 +42,10 @@ function stopRecordingCallback() {
   var uploader = new VimeoUpload({
     file: new File([blob], "filename.xyz"),
     token: '57a47e0e09b240a835a3606305cfe2a2',
+    onComplete: (data) => {
+      console.log(data);
+      document.getElementById('div-response').innerHTML = data;
+    }
   });
   uploader.upload();
   
