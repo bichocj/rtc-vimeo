@@ -201,8 +201,10 @@
             // get vimeo upload  url, user (for available quote), ticket id and complete url
             if (e.target.status < 400) {
                 var response = JSON.parse(e.target.responseText)
+                this.response = response
                 this.url = response.upload.upload_link
                 this.video_url = response.uri
+                this.video_link = response.link
                 this.user = response.user
                 this.ticket_id = response.ticket_id
                 this.complete_url = defaults.api_url + response.complete_uri
@@ -305,7 +307,9 @@
      */
     me.prototype.complete_ = function(xhr) {
         const video_id = this.video_url.split('/').pop()
-        this.onComplete(video_id);
+        const video_link = this.video_link
+        const response = this.response
+        this.onComplete({video_id, video_link, response});
     }
 
     /**

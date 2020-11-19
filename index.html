@@ -42,9 +42,8 @@ function stopRecordingCallback() {
   var uploader = new VimeoUpload({
     file: new File([blob], "filename.xyz"),
     token: '57a47e0e09b240a835a3606305cfe2a2',
-    onComplete: (data) => {
-      console.log(data);
-      document.getElementById('div-response').innerHTML = data;
+    onComplete: (data) => {      
+      document.getElementById('div-response').innerHTML = JSON.stringify(data.response);
     }
   });
   uploader.upload();
